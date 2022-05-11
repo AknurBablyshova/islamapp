@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        {% load static %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'timesofnamaz/style.css' %}">
+        <title>islamapp</title>
+    </head>
+
+    <body class="main">
+
+        <table class="table center table-borderless">
+
+            <tbody style="color:aliceblue;">
+              <tr>
+                <td class="tdcenter" data-toggle="modal" data-target="#FajrModal">Fajr</td>
+                <td><img style="width: 12px" src="{% static 'timesofnamaz/images/speaker2.png' %}" alt=""></td>
+                <th id="fajrTime" class="tcenter">{{ namaztimesinfo.fajr }}</th>
+              </tr>
+              <tr>
+                <td class="tdcenter" data-toggle="modal" data-target="#SunriseModal">Sunrise</td>
+                <td><img style="width: 12px" src="{% static 'timesofnamaz/images/speaker2.png' %}" alt=""></td>
+                <th id="sunriseTime" class="tcenter">{{ namaztimesinfo.sunrise }}</th>
+              </tr>
+              <tr>
+                <td class="tdcenter" data-toggle="modal" data-target="#DhuhrModal">Dhuhr</td>
+                <td><img style="width: 12px" src="{% static 'timesofnamaz/images/speaker2.png' %}" alt=""></td>
+                <th id="dhuhrTime" class="tcenter">{{ namaztimesinfo.dhuhr }}</th>
+              </tr>
+              <tr>
+                <td class="tdcenter" data-toggle="modal" data-target="#AsrModal">Asr</td>
+                <td><img style="width: 12px" src="{% static 'timesofnamaz/images/speaker2.png' %}" alt=""></td>
+                <th id="asrTime" class="tcenter">{{ namaztimesinfo.asr }}</th>
+              </tr>
+              <tr>
+                <td class="tdcenter" data-toggle="modal" data-target="#MaghribModal">Maghrib</td>
+                <td><img style="width: 12px" src="{% static 'timesofnamaz/images/speaker2.png' %}" alt=""></td>
+                <th id="maghribTime" class="tcenter">{{ namaztimesinfo.maghrib }}</th>
+              </tr>
+              <tr>
+                <td class="tdcenter" data-toggle="modal" data-target="#IshaModal">Isha</td>
+                <td><img style="width: 12px" src="{% static 'timesofnamaz/images/speaker2.png' %}" alt=""></td>
+                <th id="ishaTime" class="tcenter">{{ namaztimesinfo.isha }}</th>
+              </tr>
+              <tr>
+                <td class="tdcenter forgreen" style="border-radius: 0 0 0 10px; background-color:green;">{{ whichpray.whichPray }}</td>
+                <td style="background-color: green;"></td>
+                <th id="timeLeft" style="border-radius: 0 0 10px 0; background-color:green;">timeleft</th>
+              </tr>
+            </tbody>
+        </table>
+
+        <div style="width: 200px; margin-left: 10px; font-size: 20px;">
+            <br>
+            <div style="color: aliceblue;">{{ namaztimesinfo.city }}</div>
+            <div style="color:rgb(189, 207, 230);">
+                  {{ namaztimesinfo.dayOfWeek }}
+                <br> {{ hijridate.number }} {{ hijridate.en_month }}, {{ hijridate.year }}
+            </div>
+            <div id="time" style="color: aliceblue; background-color: rgb(202, 202, 234); width:fit-content;">time</div>
+        </div>
+        <div class="homebutton">
+        </div>
+
+        <div class="container">
+            <nav class="navbar fixed-bottom" style="width: 100px; margin-left: auto; margin-right: auto;">
+                <a href="{% url 'compas' %}"><img src="{% static 'timesofnamaz/images/compas-icon.png' %}" alt="" style="width: 25px; margin-right: 8px;"></a>
+                <a href="{% url 'index' %}"><img src="{% static 'timesofnamaz/images/home-icon.png' %}" alt="" style="width: 25px;"></a>
+                <a><img src="{% static 'timesofnamaz/images/settings-icon.jpg' %}" alt="" style="width: 25px; margin-left: 8px;"></a>
+            </nav>
+        </div>
+
+
+        <!-- Modal Fajr -->
+        <div class="modal fade" id="FajrModal" tabindex="-1" role="dialog" aria-labelledby="FajrModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="FajrModalLabel">Fajr</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  {{ prayertimestext.fajr }}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Modal Sunrise -->
+        <div class="modal fade" id="SunriseModal" tabindex="-1" role="dialog" aria-labelledby="SunriseModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="SunriseModalLabel">Sunrise</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  {{ prayertimestext.sunrise }}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Dhuhr -->
+        <div class="modal fade" id="DhuhrModal" tabindex="-1" role="dialog" aria-labelledby="DhuhrModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="DhuhrModalLabel">Dhuhr</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  {{ prayertimestext.dhuhr }}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Asr -->
+        <div class="modal fade" id="AsrModal" tabindex="-1" role="dialog" aria-labelledby="AsrModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="AsrModalLabel">Asr</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  {{ prayertimestext.asr }}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Maghrib -->
+        <div class="modal fade" id="MaghribModal" tabindex="-1" role="dialog" aria-labelledby="MaghribModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="MaghribModalLabel">Maghrib</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  {{ prayertimestext.maghrib }}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Isha -->
+        <div class="modal fade" id="IshaModal" tabindex="-1" role="dialog" aria-labelledby="IshaModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="IshaModalLabel">Isha</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  {{ prayertimestext.isha }}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <script>text = "{{ whichpray.whichPrayTime }}"</script>
+        <script src="{% static 'timesofnamaz/js/script.js' %}"></script>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+
+
+
+
+
+
+</html>
